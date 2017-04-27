@@ -40,22 +40,22 @@ class VoteCounter(telepot.helper.ChatHandler):
         now_time = datetime.datetime.now()
         print(str(now_time.strftime("%H")))
         try:
-            if int(now_time.strftime("%H")) >= 10 and int(now_time.strftime("%H")) < 19:
-                if content_type == 'new_chat_member':
-                    new_user_hello(msg)
-                if content_type != 'text':
-                    print('Not a text message.')
-                    return
-                if msg['text'] == '/boobs':
-                    print('boobs')
-                    sender_photo(chat_id, instagramm.Inst('boobs'))
-                    return
-                if re.findall('/#.*', msg['text']):
-                    diez = msg['text'][3:]
-                    print(diez)
-                    sender_photo(chat_id, instagramm.Inst(diez))
-            else:
-                sender_photo(chat_id, 'https://files5.adme.ru/files/comment/part_2036/20357060-1414483493.png')
+            # if int(now_time.strftime("%H")) >= 10 and int(now_time.strftime("%H")) < 19:
+            if content_type == 'new_chat_member':
+                new_user_hello(msg)
+            if content_type != 'text':
+                print('Not a text message.')
+                return
+            if msg['text'] == '/boobs':
+                print('boobs')
+                sender_photo(chat_id, instagramm.Inst('boobs'))
+                return
+            if re.findall('/#.*', msg['text']):
+                diez = msg['text'][3:]
+                print(diez)
+                sender_photo(chat_id, instagramm.Inst(diez))
+            # else:
+            #     sender_photo(chat_id, 'https://files5.adme.ru/files/comment/part_2036/20357060-1414483493.png')
         except Exception as e:
             sender_photo(chat_id, 'https://files5.adme.ru/files/comment/part_2036/20357060-1414483493.png')
 
