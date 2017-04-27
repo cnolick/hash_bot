@@ -1,10 +1,10 @@
 import requests
 import json
 import random
-import re
 
 def Inst(diez):
     try:
+        print('start')
         r = requests.get("""https://www.instagram.com/explore/tags/{diez}/""".format(diez=diez))
         text = r.text.encode('utf-8')
         text = text.decode()
@@ -27,16 +27,13 @@ def Inst(diez):
                             if '<script type="text/javascript">window._sharedData =' in element:
                                 Dict = element[52:-10]
                                 Dict = json.loads(Dict)
-                                videoUrl = Dict["entry_data"]['PostPage'][0]['media']['video_url']
-                                videoComment = Dict["entry_data"]['PostPage'][0]['media']['caption']
+                                videoUrl = Dict["entry_data"]['PostPage'][0]['graphql']['shortcode_media']['video_url']
+                                videoComment = Dict["entry_data"]['PostPage'][0]['graphql']['shortcode_media']\
+                                    ['edge_media_to_caption']['edges'][0]['node']['text']
                                 photoDict.append(videoUrl+"||"+videoComment)
                     else:
-                        photoDict.append(x['thumbnail_src']+"||"+x['caption'])
-                b = random.randint(0, len(photoDict)-1)
-                print(photoDict[b])
-                return (photoDict[b])
+                        photoDict.append(x['thumbnail_src'] + "||" + x['caption'])
+        b = random.randint(0, len(photoDict)-1)
+        return (photoDict[b])
     except Exception as e:
         return "Oooops, #{} - Not Found".format(diez)
-
-
-#Inst('boobs')
